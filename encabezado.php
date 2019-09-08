@@ -4,15 +4,18 @@
                           <a class="dropdown-item" href="#home_s">Home</a>
                           <a class="dropdown-item" href="#productos_s">Productos</a>
                           <a class="dropdown-item" href="#faq_s">F.A.Q</a>
-                          <a class="dropdown-item" href="#registrarse_s">Registrarse</a>
-                          <a class="dropdown-item" href="#ingresar_s">Ingresar</a>
-                          <a class="dropdown-item" href="#tuPerfil_s">Tu Perfil</a>
-                          <a class="dropdown-item" href="#nosotros_s">Sobre Nosotros</a>
+                          <a class="dropdown-item" href="../tpIntegrador/registro.php">Registrarse</a>
+                          <a class="dropdown-item" href="../tpIntegrador/inicioSesion.php">Ingresar</a>
+                          <a class="dropdown-item" href="../tpIntegrador/perfil.php">Tu Perfil</a>
+                          <a class="dropdown-item" href="#nosotros_s">Sobre Nosotros</a> 
+                        
                         </div>
             </div>
+        
           <nav class="navbar navbar-dark bg-dark">
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
+                <h6>Categorias</h6>
               </button>
               <!--Boton Buscar -->
               <form class="form-inline my-2 my-lg-0">
