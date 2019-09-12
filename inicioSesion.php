@@ -1,41 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/inicioSesion.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
+	
+    
     <title>Inicio de sesion</title>
 </head>
 <body>
+  <header>
+  <?php include_once "encabezado.php"; ?>
+  </header>
+  <br>
+  <br>
+  
   <div class="container">
-        <header>
-          <?php include_once "encabezado.php" ?>
-        </header>
-        <br>
-        <!-- Inicio Sesion -->
-        <form>
-                    <div class="form-group">
-                            <label for="exampleDropdownFormEmail2">Correo electronico</label>
-                            <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
-                    </div>
-                    <div class="form-group">
-                            <label for="exampleDropdownFormPassword2">Contraseña</label>
-                            <input type="password" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password">
-                    </div>
-                    <div class="form-group">
-                        <div class="form-check">
-                              <input type="checkbox" class="form-check-input" id="dropdownCheck2">
-                              <label class="form-check-label" for="dropdownCheck2">
-                                Recordarme
-                              </label>
-                        </div>
-                      </div>
-                      <button type="submit" class="btn btn-primary">Ingresar</button>
-          </form>
-
-</div>               
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Iniciar Sesion</h3>
+				<div class="d-flex justify-content-end social_icon">
+				</div>
+			</div>
+			<div class="card-body">
+				<form>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="usuario">
+						
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" class="form-control" placeholder="contraseña">
+					</div>
+					<div class="row align-items-center remember">
+						<input type="checkbox">Recuerdame
+					</div>
+					<div class="form-group">
+						<input type="submit" value="Ingresar" class="btn float-right login_btn">
+					</div>
+				</form>
+			</div>
+			<div class="card-footer">
+				<div class="d-flex justify-content-center links">
+					No tienes una cuenta?<a href="#">Registrate</a>
+				</div>
+				<div class="d-flex justify-content-center">
+					<a href="#">Olvidaste tu contraseña?.</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
+
