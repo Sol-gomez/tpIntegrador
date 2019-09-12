@@ -1,0 +1,22 @@
+*{
+    box-sizing: border-box;
+  
+}
+
+body{
+    position: relative;
+}
+
+.contenedor{
+    width: 100%;
+    height: 25%;
+    border: 1rem solid black;
+}
+
+.control{
+    justify-content: between;
+}
+
+#faq_s{
+    display: flex;
+}
