@@ -12,6 +12,12 @@ font-family: 'Numans', sans-serif;
 .container{
 height: 100%;
 align-content: center;
+
+}
+
+.iniciosesion{
+    background-image: url("../img/fondoLogin1.jpg");
+    background-size: 100%;
 }
 
 .card{
