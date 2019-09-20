@@ -5,7 +5,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/inicioSesion.css">
+    <link rel="stylesheet" href="css/css/inicioSesion.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<!--Bootsrap 4 CDN-->
@@ -18,7 +18,7 @@
     
     <title>Inicio de sesion</title>
 </head>
-<body>
+<body class ="iniciosesion">
   <header>
   <?php include_once "encabezado.php"; ?>
   </header>
@@ -26,7 +26,7 @@
   <br>
   
   <div class="container">
-	<div class="d-flex justify-content-center h-100">
+	<div class="d-flex justify-content-center h-80">
 		<div class="card">
 			<div class="card-header">
 				<h3>Iniciar Sesion</h3>
@@ -69,4 +69,6 @@
 </div>
 </body>
 </html>
+
+
 
