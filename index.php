@@ -21,125 +21,17 @@
           <a class="botonEncima1 btn btn-primary btn-lg" href="#" role="button">Registrarse</a>
           <a class=" botonEncima btn btn-primary btn-lg" href="#" role="button">Iniciar Sesion</a>
       </div>
-       
-       <section class="header">
-            <article class="card text-center">
-                    <article class="card-header">
-                     <h1>Productos para vos!</h1>
-                    </article>
-                    <article class="card-body" >
-                            <article class="m-4 card float-left _cajas" style="width: 18rem;">
-                                    <img src="img/cel.webp" class="card-img-top" alt="...">
-                                    <article class="card-body">
-                                      <h5 class="card-title">Card title</h5>
-                                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </article>
-                                </article>
-                            <article class="m-4 card float-left _cajas" style="width: 18rem;">
-                                    <img src="img/mesa.jpg" class="card-img-top" alt="...">
-                                    <article class="card-body">
-                                       <h5 class="card-title">Card title</h5>
-                                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                       <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </article>
-                                </article>
-                             <article class="m-4 card float-left _cajas" style="width: 18rem;">
-                                    <img src="img/ropa.jpg" class="card-img-top" alt="...">
-                                    <article class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </article>
-                                </article>
-                                <article class="m-4 card float-left _cajas" style="width: 18rem;">
-                                    <img src="img/cel.webp" class="card-img-top" alt="...">
-                                    <article class="card-body">
-                                      <h5 class="card-title">Card title</h5>
-                                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </article>
-                                </article>
-                            <article class="m-4 card float-left _cajas" style="width: 18rem;">
-                                    <img src="img/mesa.jpg" class="card-img-top" alt="...">
-                                    <article class="card-body">
-                                       <h5 class="card-title">Card title</h5>
-                                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                       <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </article>
-                                </article>
-                             <article class="m-4 card float-left _cajas" style="width: 18rem;">
-                                    <img src="img/ropa.jpg" class="card-img-top" alt="...">
-                                    <article class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </article>
-                                </article>
-                                <article class="m-4 card float-left _cajas" style="width: 18rem;">
-                                    <img src="img/cel.webp" class="card-img-top" alt="...">
-                                    <article class="card-body">
-                                      <h5 class="card-title">Card title</h5>
-                                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </article>
-                                </article>
-                            <article class="m-4 card float-left _cajas" style="width: 18rem;">
-                                    <img src="img/mesa.jpg" class="card-img-top" alt="...">
-                                    <article class="card-body">
-                                       <h5 class="card-title">Card title</h5>
-                                       <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                       <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </article>
-                                </article>
-                             <article class="m-4 card float-left _cajas" style="width: 18rem;">
-                                    <img src="img/ropa.jpg" class="card-img-top" alt="...">
-                                    <article class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </article>
-                                </article>
-                               
-                    </article>
-            </article>
-            <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-center">
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Anterior</a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#">Siguiente</a>
-                      </li>
-                    </ul>
-                  </nav>
-        </section>
-
+      <br>
+        
+      <section >
+           <?php include_once "productos.php" ?>
+      </section>
+        
     <br>
-    <hr>
-
+  
     <section id="faq_s">
         <?php include_once "faq.php"; ?>
     </section>
-
-    
-
-    
-
-    <section id="tuPerfil_s"></section>
-
-    <section id="nosotros_s"></section>
-
-
-
-
-
-
-
-
 
     <footer>
       <?php include_once "pieDePag.php" ?>
