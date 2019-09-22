@@ -22,12 +22,11 @@
           <a class=" botonEncima btn btn-primary btn-lg" href="#" role="button">Iniciar Sesion</a>
       </div>
       <br>
-        
-      <section >
+       
+       <section >
            <?php include_once "productos.php" ?>
-      </section>
-        
-    <br>
+        </section>
+
   
     <section id="faq_s">
         <?php include_once "faq.php"; ?>
