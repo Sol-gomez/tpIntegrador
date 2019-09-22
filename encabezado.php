@@ -1,10 +1,10 @@
-    <nav class="navbar navbar-expand nav-fill" style="background-color: #e3f2fd;" >
+<nav class="navbar navbar-expand nav-fill" style="background-color: #e3f2fd;" >
  
-  <a class="nav-item nav-link active" href="#">Home</a>
-  <a class="nav-item nav-link active" href="#">Productos</a>
-  <a class="nav-item nav-link active" href="#">FAQ</a>
-  <a class="nav-item nav-link active" href="#" >Sobre Nosotros</a>
-  <a class="nav-item nav-link active" href="#" >Ingresar</a>
-  <a class="nav-item nav-link active" href="#" >Tu Perfil</a>
+  <a class="nav-item nav-link active" href="index.php">Home</a>
+  <a class="nav-item nav-link active" href="productos.php">Productos</a>
+  <a class="nav-item nav-link active" href="faq.php">FAQ</a>
+  <a class="nav-item nav-link active" href="#sobreNosotros" >Sobre Nosotros</a>
+  <a class="nav-item nav-link active" href="inicioSesion.php" >Ingresar</a>
+  <a class="nav-item nav-link active" href="perfil.php" >Tu Perfil</a>
 
 </nav>
