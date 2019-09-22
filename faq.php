@@ -1,5 +1,5 @@
-<div class="jumbotron ">
-  <div class="container-fluid">
+<div class="jumbotron " >
+  <div class="container-fluid" >
     <h1 class="display-4">Preguntas Frecuentes</h1>
     <hr class="my-4">
     <p class="lead">1: ¿Como Permuto?</p>
