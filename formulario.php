@@ -2,7 +2,7 @@
     if($_POST){
         $errores=validar($_POST);
         if(count($errores==0)){
-        $registro = armarRegistro($_POST);
+        $registro = crearRegistro($_POST);
         guardar($registro);
         exit;
         }
