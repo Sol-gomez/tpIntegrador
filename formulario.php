@@ -1,7 +1,7 @@
 <?php
 
-require_once("controladores/funciones.php");
-requiere_once("helpers.php");
+  require_once("controladores/funciones.php");
+  require_once("helpers.php");
 
 
     if($_POST){
