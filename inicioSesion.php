@@ -1,3 +1,27 @@
+<?php
+session_start();
+require_once('controladores/funciones.php');
+
+if($_POST){
+    $errores= validar($_POST);
+    if(count($errores==0)){
+        $usuario= buscarEmail($_POST["email"]);
+        if($usuario == null){
+            $errores["email"]= "usuario no encotrado";
+        }else{
+            password_verify($_POST["password"],$usuario["password"])==false){
+                $errores["password"]="verifique sus datos";
+            }
+        }
+        seteoUsuario($usuario,$_POST);
+        if (validarUsuario()){
+            header ("location: perfil.php");
+        }else{
+            header ("location: login.php");
+        }
+        exit;
+    }
+}
 <!DOCTYPE html>
 <html lang="en">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
