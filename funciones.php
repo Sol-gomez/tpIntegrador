@@ -6,6 +6,12 @@ function validar($datos){  //$datos recibe a $_POST
    if(empty($nombre)){  //si nombre esta vacio entra
       $errores["nombre"] = "Completar con su nombre";
    }
+  
+  $apellido=trim($datos["apellido"]);
+  if(empty($apellido)){
+      $errores["apellido"]= "Completar con su apellido";
+  }
+  
    $email=trim($datos["email"]); //si email tiene espacios en blancos los elimina
    if(empty($email)){
       $errores["email"] = "Complete el campo con su email";
@@ -21,7 +27,13 @@ function validar($datos){  //$datos recibe a $_POST
         $errores["password"]= "La contraseña debe tener minimo 6 caracteres";
       } elseif($password != $repassword){ //si lo que llega en password es distino a lo que llega en repassword    
           $errores["repassword"]="No coindiden las contrasenas"; //ubica ESTE error en: $errores; posicion “repassword” 
-         } 
+         }
+  
+  $direccion=trim($datos["direccion"]);
+  if(empty($direccion)){
+      $errores["direccion"] = "Por favor complete su direccion."
+  }
+  
          return $errores;
 }
 
@@ -38,8 +50,10 @@ function persistir($campo){ //esta funcion se utiliza en el “value” del camp
 function crearRegistro($datos){
     $usuario=[ //creamos un array asociativo con los datos que envio el usuario    
       "nombre"=>$datos["nombre"],    
+      "apellido"=>$datos["apellido"],
       "email"=>$datos["email"],    
-      "password"=> password_hash($datos["password"],PASSWORD_DEFAULT) // hasheamos el password para que se guarde encriptado  
+      "password"=> password_hash($datos["password"],PASSWORD_DEFAULT), // hasheamos el password para que se guarde encriptado  
+      "direccion"=>$datos["direccion"]
           ];
     return $usuario; //la funcion devuelve el array asociativo con los datos del usuario.  
  }    
