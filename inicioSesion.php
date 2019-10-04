@@ -1,7 +1,6 @@
 <?php
 session_start();
-require_once('controladores/funciones.php');
-
+require_once("controladores/funciones.php");
 if($_POST){
     $errores= validar($_POST);
     if(count($errores==0)){
@@ -9,8 +8,8 @@ if($_POST){
         if($usuario == null){
             $errores["email"]= "usuario no encotrado";
         }else{
-            password_verify($_POST["password"],$usuario["password"])==false){
-                $errores["password"]="verifique sus datos";
+            password_verify($_POST["password"],$usuario["password"])==false;
+            $errores["password"]="verifique sus datos";
             }
         }
         seteoUsuario($usuario,$_POST);
@@ -21,7 +20,6 @@ if($_POST){
         }
         exit;
     }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
