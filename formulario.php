@@ -1,14 +1,26 @@
 <?php
+
+require_once("controladores/funciones.php");
+
+
     if($_POST){
-        $errores=validar($_POST);
+        $errores=validar($_POST,$_FILES);
         if(count($errores==0)){
-        $registro = crearRegistro($_POST);
-        guardar($registro);
-        exit;
+          $usuario=buscarPorEmail($_POST["email"]);
+          if($usuario!=NULL){
+            $errores["email"]="Usuario registrado ";
+          }else{
+            $avatar=armarAvatar($_FILES);
+            $registro=armarRegistro($_POST,$avatar);
+            guardarRegistro($registro);
+
+            header("location:login.php");
+            exit;
+          }
+        
         }
     }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,36 +34,54 @@
     
     <title>Formulario</title>
 </head>
+
 <body>
   <div class= "container">
-
     <header>
-      <?php include_once "encabezado.php" ?>
-    </header>
+      <?php include_once "encabezado.php"; ?>
+    </header> 
+    <br>
+    <div  class="card">
+      <div class="card-header">
+        <h2>Registro</h2>
+      </div>
 
+    <?php if(isset($errores)):?>
+      <ul class="alert alert-danger">
+      <?php foreach($errores as $value):?>
+      <li><?=$value;?></li>
+  <?php endforeach;?>
+      </ul>
+  <?php endif;?>
+      <div class="card-body">
     <!-- Registro -->
-              <form>
+              <form class="form" name="formRegistro"  novalidate action="" method="POST" enctype="multipart/form-data">
                     <div class="form-row">
                             <div class="form-group col-md-6">
-                                    <label for="inputNombre">Nombre</label>
-                                    <input type="text" class="form-control" id="inputNombre" placeholder="Nombre completo">
+                                    <label for="nombre">Nombre</label>
+                                    <input requiered name="nombre" type="text" value= "<?=isset($errores['username'])? "":old('userName') ;?>" class="form-control" id="nombre" placeholder="Nombre completo">
                                   </div>
                                   <div class="form-group col-md-6">
                                     <label for="inputApellido">Apellido</label>
-                                    <input type="text" class="form-control" id="inputApellido" placeholder="Apellido">
+                                    <input requiered name="apellido" type="text" value=" <?=isset($errores['apellido'])?"":old('apellido');?>" class="form-control" id="apellido" placeholder="Apellido">
                                   </div>
                       <div class="form-group col-md-6">
                         <label for="inputEmail4">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4" placeholder="Correo electronico">
+                        <input requiered type="email" class="form-control" id="inputEmail4" placeholder="Ingrese su correo electronico" value="<?=isset($errores['email'])?"":old('email');?>"
                       </div>
                       <div class="form-group col-md-6">
-                        <label for="inputPassword4">Contraseña</label>
-                        <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                        <label for="password">Contraseña</label>
+                        <input requiered type="password" value=""  class="form-control" id="password" placeholder="Password">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="password">Repetir contraseña</label>
+                        <input requiered name="repassword" type="password" value=""  class="form-control" id="repassword" placeholder="Repetir password">
                       </div>
                     </div>
+
                     <div class="form-group">
                       <label for="inputAddress">Dirección</label>
-                      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                      <input requiered type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
                     </div>
                     
                     <div class="form-row">
@@ -90,11 +120,18 @@
                               </select>
                       </div>
                       
-                    </div>
-                    
+                      <div class="form-group">
+                        <label for="avatar">Avatar</label>
+                        <input required name="avatar" type="file" value= "" class="form-control" id="avatar" >
+                      </div> 
+                      
+                    </div>   
                     <button type="submit" class="btn btn-primary">Registrarse</button>
+                    <a href="login.php" class="btn btn-link">Ya poseo una cuenta</a>
                   </form>
-
-                  </div>          
-</body>
+                  </div>                            
+        </div>
+    </div>
+    <br>
+  </body>
 </html>
