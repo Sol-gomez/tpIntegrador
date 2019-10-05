@@ -6,7 +6,7 @@ function validar($datos,$imagen){  //$datos recibe a $_POST
    if(empty($nombre)){  //si nombre esta vacio entra
       $errores["nombre"] = "Completar con su nombre";
    }
-   $email=trim($datos["email"]); //si email tiene espacios en blancos los elimina
+   $email=trim($datos['email']); //si email tiene espacios en blancos los elimina
    if(empty($email)){
       $errores["email"] = "Complete el campo con su email";
    }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){ // si llega algo y no pasa el filtro de la funcion VALIDATE EMAIL
@@ -90,7 +90,7 @@ function crearRegistro($datos){  //esta funcion prepara el array asociativo
     $ext =pathinfo($nombre, PATHINFO_EXTENSION);
     $archivoOrigen = $imagen['avatar']['tmp_name'];
     $archivoDestino = dirname(__DIR__);
-    $archivoDestino = $archivoDestino."/imagenes/";
+    $archivoDestino = $archivoDestino."img/imagenes/";
     $avatar=uniqid();
     $archivoDestino =$archivoDestino.$avatar.".".$ext;  //aca estoy copiando al servidor nuestro archivo destino
     move_uploaded_file($archivoOrigen, $archivoDestino); // aca retorno al usuario solo la imagen la cual sera guardada en el archivo json
@@ -173,6 +173,10 @@ function validarUsuario(){
       return false;
   }
 }
+
+
+?>
+
 
 
 ?>
