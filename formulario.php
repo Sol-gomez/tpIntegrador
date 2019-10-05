@@ -1,9 +1,9 @@
 <?php
 
-  require_once("controladores/funciones.php");
+  require_once("funciones.php");
   require_once("helpers.php");
 
-
+ 
     if($_POST){
         $errores=validar($_POST,$_FILES);
         if(count($errores==0)){
@@ -12,10 +12,10 @@
             $errores["email"]="Usuario registrado ";
           }else{
             $avatar=armarAvatar($_FILES);
-            $registro=armarRegistro($_POST,$avatar);
+            $registro=crearRegistro($_POST,$avatar);
             guardarRegistro($registro);
 
-            header("location:login.php");
+            header("location:inicioSesion.php");
             exit;
           }
         
@@ -68,11 +68,11 @@
                                   </div>
                       <div class="form-group col-md-6">
                         <label for="inputEmail4">Email</label>
-                        <input requiered type="email" class="form-control" id="inputEmail4" placeholder="Ingrese su correo electronico" value="<?=isset($errores['email'])?"":old('email');?>"
+                        <input requiered type="email" name="email" class="form-control" id="inputEmail4" placeholder="Ingrese su correo electronico" value="<?=isset($errores['email'])?"":old('email');?>">
                       </div>
                       <div class="form-group col-md-6">
                         <label for="password">Contraseña</label>
-                        <input requiered type="password" value=""  class="form-control" id="password" placeholder="Password">
+                        <input requiered type="password" value="" name = "password"  class="form-control" id="password" placeholder="Password">
                       </div>
                       <div class="form-group col-md-6">
                         <label for="password">Repetir contraseña</label>
@@ -82,17 +82,17 @@
 
                     <div class="form-group">
                       <label for="inputAddress">Dirección</label>
-                      <input requiered type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                      <input requiered type="text" name="direccion" class="form-control" id="inputAddress" placeholder="1234 Main St">
                     </div>
                     
                     <div class="form-row">
                       <div class="form-group col-md-6">
                         <label for="inputCity">Ciudad</label>
-                        <input type="text" class="form-control" id="inputCity">
+                        <input type="text" name="ciudad" class="form-control" id="inputCity">
                       </div>
                       <div class="form-group col-md-4">
                         <label for="inputState">Provincia</label>
-                        <select id="inputState" class="form-control">
+                        <select id="inputState" class="form-control" name="provincia">
                                 <option selected>Seleccione...</option>
                                 <option>Buenos Aires</option>
                                 <option>Catamarca</option>
