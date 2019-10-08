@@ -2,9 +2,9 @@
 function validar($datos,$imagen){  //$datos recibe a $_POST
   $errores=[];
   
-  $nombre=trim($datos["nombre"]); //trim es una funcion que elimina los espacios blancos en caso que exista
+  $nombre=trim($datos["usuario"]); //trim es una funcion que elimina los espacios blancos en caso que exista
    if(empty($nombre)){  //si nombre esta vacio entra
-      $errores["nombre"] = "Completar con su nombre";
+      $errores["usuario"] = "Completar con su nombre";
    }
    $email=trim($datos['email']); //si email tiene espacios en blancos los elimina
    if(empty($email)){
@@ -13,14 +13,14 @@ function validar($datos,$imagen){  //$datos recibe a $_POST
       $errores["email"] = "Email invalido. Escriba el mail correcto";
    }
    
-   $password=trim($datos["password"]);
+   $password=trim($datos["contraseña"]);
    $repassword=trim($datos["repassword"]);
    if (empty($password)){
-      $errores["password"]="complete el password"; // ubica este error en: $errores posicion “password”   
+      $errores["contraseña"]="complete el password"; // ubica este error en: $errores posicion “password”   
     }elseif(strlen($password)<6) { //si llega algo y el string length (los caracteres) es menor que 6   
-        $errores["password"]= "La contraseña debe tener minimo 6 caracteres";
+        $errores["contraseña"]= "La contraseña debe tener minimo 6 caracteres";
       } elseif($password != $repassword){ //si lo que llega en password es distino a lo que llega en repassword    
-          $errores["repassword"]="No coindiden las contrasenas"; //ubica ESTE error en: $errores; posicion “repassword” 
+          $errores["contraseña"]="No coindiden las contrasenas"; //ubica ESTE error en: $errores; posicion “repassword” 
          }
     
   if(isset($_FILES)){
@@ -69,28 +69,90 @@ function validarOlvidePassword($datos){
 }
 
 
-function crearRegistro($datos){  //esta funcion prepara el array asociativo
-    $usuario=[ //creamos un array asociativo con los datos que envio el usuario    
-      'nombre'=>$datos["nombre"],    
-      'email'=>$datos["email"],    
-      'password'=> password_hash($datos["password"],PASSWORD_DEFAULT), // hasheamos el password para que se guarde encriptado  
-      'avatar'=>$avatar,
-      'role'=>1      
-    ];
+function crearRegistro_DA($datos){  //esta funcion prepara el array asociativo
+  $usuario = [
+    "nombre"=>$datos["nombre"],
+    "apellido"=>$datos["apellido"],
+    "email"=>$datos['email'],
+    "contraseña"=>$datos["contraseña"],
+   //"contraseña"=>password_hash($datos["contraseña"],PASSWORD_DEFAULT),
+    "provincia"=>$datos["provincia"],
+    "ciudad"=>$datos["ciudad"],
+    "direccion"=>$datos["direccion"]
+];
     return $usuario; //la funcion devuelve el array asociativo con los datos del usuario.  
  }    
 
- function guardarRegistro($usuario){      //esta funcion permite guardar los datos en el archivo json
-      $archivoJson = json_encode($usuario); // usamos la funcion json_encode, para convertir el array asociativo (que creamos en la funcion anterior), en formato JSON y lo guardamos en una variable      
-      file_put_contents("usuarios.json", $jarchivoJson.PHP_EOL, FILE_APPEND); //ponemos el contenido en el archivo usuarios.json 
-  }
+ function almacenarDatos($nombreArchivo, $array)
+    {
+        $datos = json_encode($array);
+      //  var_dump($datos);
+        file_put_contents($nombreArchivo, $datos . PHP_EOL, FILE_APPEND);
+        
+        
+    }
 
-  function armarAvatar($imagen){
+ function crearUsuario_DA($datos){
+    $arrayDatos = crearRegistro($_POST);
+    almacenarDatos('user.json',$arrayDatos);
+}
+
+function abrirBaseJson_DA($archivo)
+    {
+        if (file_exists($archivo))
+        {
+         
+            $json = file_get_contents($archivo); /// Pasa los datos de json a un string
+            $json = explode(PHP_EOL, $json); /// separa los datos en un array
+            array_pop($json); ///quita el ultimo elemento del array ya que es null
+            foreach($json as $key => $value)
+            {
+               
+                $arrayUsuarios[]=json_decode($value,true);
+            }
+            return $arrayUsuarios;
+        }
+        else
+        {
+            echo "no existe el archivo";
+        }
+    }
+
+function existeUsuario_DA($datos) ///Devuelve true si el usuario y la contraseña son correctas
+{
+    $nombreUsuario= $datos["usuario"];
+    $contraseña= $datos["contraseña"];
+  
+
+    $usuario = abrirBaseJson_DA("user.json");
+    foreach ($usuario as $key => $value)
+    {   
+        if ($nombreUsuario == $value["email"])
+        {
+            if ($contraseña == $value["contraseña"])
+            {
+              $_SESSION['nombre']=$value['nombre'];
+              $_SESSION['apellido']=$value['apellido'];
+              $_SESSION['email']=$value['email'];
+              $_SESSION['contraseña']=$value["contraseña"];
+              $_SESSION['provincia']=$value['provincia'];
+              $_SESSION['direccion']=$value['direccion'];
+              $_SESSION['ciudad']=$value['ciudad'];
+
+              return true;
+            }
+        }     
+    }
+
+    return false;
+}
+
+function armarAvatar($imagen){
     $nombre=$imagen['avatar']['name'];
     $ext =pathinfo($nombre, PATHINFO_EXTENSION);
     $archivoOrigen = $imagen['avatar']['tmp_name'];
     $archivoDestino = dirname(__DIR__);
-    $archivoDestino = $archivoDestino."img/imagenes/";
+    $archivoDestino = $archivoDestino."img/";
     $avatar=uniqid();
     $archivoDestino =$archivoDestino.$avatar.".".$ext;  //aca estoy copiando al servidor nuestro archivo destino
     move_uploaded_file($archivoOrigen, $archivoDestino); // aca retorno al usuario solo la imagen la cual sera guardada en el archivo json
@@ -132,7 +194,7 @@ function buscarPorEmail($email){
 
 function abrirBaseDatos(){  //Esta función abre nuestro archivo json y lo prepara para eliminar el último registro en blanco y además genero el array asociativo del mismo. Convierto de json a array asociativo para mas adelante con la funcion "bucarEmail" poder recorrerlo y verificar si el usuario existe o no en mi base de datos, dicha verificación la hago por el email del usuario, ya que es el dato único que tengo del usuario
 
-  if(file_exists('usuarios.json')){
+  if(file_exists('user.json')){
       $archivoJson = file_get_contents('usuarios.json');
       //Aquí lo que hago es generar cada array con un salto de linea, para poderlo ver ejecute aquí un dd($archivoJson)
       $archivoJson = explode(PHP_EOL,$archivoJson);
@@ -151,14 +213,14 @@ function abrirBaseDatos(){  //Esta función abre nuestro archivo json y lo prepa
   }
 }
 
-function seteoUsuario($usuario,$dato){ //Aqui creo los las variables de session y de cookie de mi usuario que se está loguendo
-  $_SESSION['nombre']=$usuario['nombre'];
-  $_SESSION['email']=$usuario['email'];
+function sessionCargar($datos){ //Aqui creo los las variables de session y de cookie de mi usuario que se está loguendo
+  $_SESSION['nombre']=$dato['nombre'];
+  $_SESSION['email']=$dato['usuario'];
   $_SESSION['avatar']=$usuario['avatar'];
   $_SESSION['role']=$usuario['role'];
   if(isset($dato['recordarme'])){
-      setcookie('email',$usuario['email'],time()+3600);
-      setcookie('password',$dato['password'],time()+3600);
+      setcookie('email',$dato['usuario'],time()+3600);
+      setcookie('password',$dato['contraseña'],time()+3600);
   }
 }
 
@@ -174,9 +236,59 @@ function validarUsuario(){
   }
 }
 
+function guardarLogin_DA($datos)
+{
+    crearCookie_DA('inicioSesionUsuario',$datos['usuario'],2592000);
+    crearCookie_DA('inicioSesionContraseña',$datos['contraseña'],2592000);
+}
+  function crearCookie_DA($nombreCookie, $valor, $tiempo)
+  {
+       setcookie($nombreCookie, $valor, time ()+$tiempo);
+  }
 
-?>
+ function eliminarCookie_DA($nombreCookie)
+ {
+     setcookie($nombreCookie,"", time()-1);
+ }
 
+ function obtenerCookie_DA($nombreCookie)
+  {
+     if (isset($_COOKIE[$nombreCookie]))
+     {
+          return $_COOKIE[$nombreCookie];
+     }
+  }
 
+function existeCookieInicio_DA() ///checkea la existencia de las cookies
+{
+    if (isset ($_COOKIE['inicioSesionUsuario']) )
+    {
+        if (isset ($_COOKIE['inicioSesionContraseña']) )
+        {
+            
+            return true;
+        }
+        
+    }
+    return false;
+}
+
+function validarCookie_DA()
+{
+    $datos["usuario"] = obtenerCookie_DA('inicioSesionUsuario');
+    $datos["contraseña"] = obtenerCookie_DA('inicioSesionContraseña');
+    return existeUsuario_DA($datos);   
+}
+
+function validarSession_DA()
+{
+    if (isset ($_SESSION["email"]) && isset($_SESSION["contraseña"]))
+    {
+      $datos["usuario"] = $_SESSION["email"];
+      $datos["contraseña"] = $_SESSION["contraseña"];
+      return existeUsuario_DA($datos); 
+    }
+      return false;
+}
 
 ?>
