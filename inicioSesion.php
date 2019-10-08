@@ -1,26 +1,35 @@
 <?php
 session_start();
-require_once("controladores/funciones.php");
+require_once('funciones.php');
+if (existeCookieInicio_DA() || validarSession_DA())
+{
+	if (validarCookie_DA() || validarSession_DA())header ("location: perfil.php");
+	else 
+	{
+		eliminarCookie_DA('inicioSesionUsuario');
+		eliminarCookie_DA('inicioSesionContraseña');
+		session_destroy();
+		header ("location: inicioSesion.php");
+	}
+	
+}
 if($_POST){
-    $errores= validar($_POST);
-    if(count($errores==0)){
-        $usuario= buscarEmail($_POST["email"]);
-        if($usuario == null){
-            $errores["email"]= "usuario no encotrado";
-        }else{
-            password_verify($_POST["password"],$usuario["password"])==false;
-            $errores["password"]="verifique sus datos";
-            }
-        }
-        seteoUsuario($usuario,$_POST);
-        if (validarUsuario()){
-            header ("location: perfil.php");
-        }else{
-            header ("location: login.php");
-        }
-        exit;
-    }
-?>
+		    if ($_POST)
+			{
+				if (existeUsuario_DA($_POST))
+				{
+					if (isset($_POST["recordarme"]))
+					{
+					   guardarLogin_DA($_POST);
+					}
+					header ("location: perfil.php");
+				}
+				else
+				{
+					header ("location: inicioSesion.php");
+				}
+			}
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -62,17 +71,17 @@ if($_POST){
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="usuario">
+						<input type="text" name = "usuario" class="form-control" placeholder="usuario (correo electronico)">
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="contraseña">
+						<input type="password" name="contraseña" class="form-control" placeholder="contraseña">
 					</div>
 					<div class="row align-items-center remember">
-						<input type="checkbox">Recuerdame
+						<input type="checkbox" name= "recordarme" value ="false">Recuerdame 
 					</div>
 					<div class="form-group">
 						<input type="submit" value="Ingresar" class="btn float-right login_btn">
@@ -81,7 +90,7 @@ if($_POST){
 			</div>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center links">
-					No tienes una cuenta?<a href="#">Registrate</a>
+					No tienes una cuenta?<a href="formulario.php">Registrate</a>
 				</div>
 				<div class="d-flex justify-content-center">
 					<a href="#">Olvidaste tu contraseña?.</a>
