@@ -1,38 +1,36 @@
 <?php
-function validar($datos,$imagen){  //$datos recibe a $_POST
+function validar($datos/*,$imagen*/){  //$datos recibe a $_POST
   $errores=[];
   
-  $nombre=trim($datos["usuario"]); //trim es una funcion que elimina los espacios blancos en caso que exista
-   if(empty($nombre)){  //si nombre esta vacio entra
-      $errores["usuario"] = "Completar con su nombre";
-   }
-   $email=trim($datos['email']); //si email tiene espacios en blancos los elimina
-   if(empty($email)){
-      $errores["email"] = "Complete el campo con su email";
-   }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){ // si llega algo y no pasa el filtro de la funcion VALIDATE EMAIL
-      $errores["email"] = "Email invalido. Escriba el mail correcto";
-   }
-   
-   $password=trim($datos["contraseña"]);
-   $repassword=trim($datos["repassword"]);
-   if (empty($password)){
-      $errores["contraseña"]="complete el password"; // ubica este error en: $errores posicion “password”   
-    }elseif(strlen($password)<6) { //si llega algo y el string length (los caracteres) es menor que 6   
-        $errores["contraseña"]= "La contraseña debe tener minimo 6 caracteres";
-      } elseif($password != $repassword){ //si lo que llega en password es distino a lo que llega en repassword    
-          $errores["contraseña"]="No coindiden las contrasenas"; //ubica ESTE error en: $errores; posicion “repassword” 
-         }
-    
-  if(isset($_FILES)){
-      $nombre = $imagen['avatar']['name'];
-      $ext = pathinfo($nombre, PATHINFO_EXTENSION);
-      if($imagen['avatar']['error']!=0){
-        $errores['avatar']="Debes subir tu foto...";
-      }elseif($ext!="jpg"  && $ext !="png"){
-        $errores['avatar']="Formato de imagen invalido";
-      }
-  }
+  $nombre=trim($datos['nombre']); //trim es una funcion que elimina los espacios blancos en caso que exista
+  $apellido=trim($datos['apellido']);
+  $email=trim($datos['email']);
+  $contraseña=trim($datos['contraseña']);
+  $contraseña2=trim($datos['contraseña2']);
 
+   if(empty($nombre)){  //si nombre esta vacio entra
+      $errores["usuario"] = "complete el campo nombre";
+   }
+
+   if(empty($apellido)){ 
+    $errores["apellido"] = "complete el campo apellido";
+   }
+  
+   if(empty($email)){ 
+    $errores["email"] = "complete el campo email";
+   }
+   else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){ // si llega algo y no pasa el filtro de la funcion VALIDATE EMAIL
+    $errores["email"] = "Email invalido. Escriba el mail correcto";
+    }
+ 
+    if (empty($contraseña)){
+      $errores["contraseña"]="complete el contraseña"; }
+    else if (strlen($contraseña)<6){
+      $errores["contraseña"]= "La contraseña debe tener minimo 6 caracteres";
+    }
+    else if($contraseña != $contraseña2){ //si lo que llega en password es distino a lo que llega en contra$contraseña2    
+          $errores["contraseña"]="No coindiden las contrasenas"; //ubica ESTE error en: $errores; posicion “contra$contraseña2” 
+         }
          return $errores;
 }
 
@@ -83,7 +81,7 @@ function crearRegistro_DA($datos){  //esta funcion prepara el array asociativo
     return $usuario; //la funcion devuelve el array asociativo con los datos del usuario.  
  }    
 
- function almacenarDatos($nombreArchivo, $array)
+ function almacenarDatos_DA($nombreArchivo, $array)
     {
         $datos = json_encode($array);
       //  var_dump($datos);
@@ -93,8 +91,8 @@ function crearRegistro_DA($datos){  //esta funcion prepara el array asociativo
     }
 
  function crearUsuario_DA($datos){
-    $arrayDatos = crearRegistro($_POST);
-    almacenarDatos('user.json',$arrayDatos);
+    $arrayDatos = crearRegistro_DA($_POST);
+    almacenarDatos_DA('user.json',$arrayDatos);
 }
 
 function abrirBaseJson_DA($archivo)
