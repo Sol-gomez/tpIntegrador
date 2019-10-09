@@ -65,7 +65,7 @@ else
                     </div>
                     <div class="info">
                         <div class="title text-center text-white">
-                            <a target="_blank" href="#">Juan Perez</a>
+                            <a target="_blank" href="#"> <?php echo $_SESSION['nombre'] ?> </a>
                         </div>
                         <section class="_dataUsuario mx-auto d-block col-4 col-lg-4 col-md-4">
                           <ul class="list-group text-center">
