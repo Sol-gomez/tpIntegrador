@@ -2,24 +2,15 @@
 
   require_once("funciones.php");
   require_once("helpers.php");
-
  
     if($_POST){
-        $errores=validar($_POST,$_FILES);
-        if(count($errores==0)){
-          $usuario=buscarPorEmail($_POST["email"]);
-          if($usuario!=NULL){
-            $errores["email"]="Usuario registrado ";
-          }else{
-            $avatar=armarAvatar($_FILES);
-            $registro=crearRegistro($_POST,$avatar);
-            guardarRegistro($registro);
-
-            header("location:inicioSesion.php");
-            exit;
-          }
-        
+        $errores=validar($_POST);
+        if ((count($errores))==0)
+        {
+          crearUsuario_DA($_POST);
+          header("location: inicioSesion.php");
         }
+        
     }
 ?>
 
@@ -46,21 +37,21 @@
       <div class="card-header">
         <h2>Registro</h2>
       </div>
-
-    <?php if(isset($errores)):?>
+      <?php if(isset($errores)):?>
       <ul class="alert alert-danger">
       <?php foreach($errores as $value):?>
       <li><?=$value;?></li>
   <?php endforeach;?>
       </ul>
   <?php endif;?>
+     
       <div class="card-body">
     <!-- Registro -->
               <form class="form" name="formRegistro"  novalidate action="" method="POST" enctype="multipart/form-data">
                     <div class="form-row">
                             <div class="form-group col-md-6">
                                     <label for="nombre">Nombre</label>
-                                    <input requiered name="nombre" type="text" value= "<?=isset($errores['username'])? "":old('userName') ;?>" class="form-control" id="nombre" placeholder="Nombre completo">
+                                    <input requiered name="nombre" type="text" value= "<?=isset($errores['usuario'])? "":old('usuario') ;?>" class="form-control" id="nombre" placeholder="Nombre completo">
                                   </div>
                                   <div class="form-group col-md-6">
                                     <label for="inputApellido">Apellido</label>
@@ -72,11 +63,11 @@
                       </div>
                       <div class="form-group col-md-6">
                         <label for="password">Contraseña</label>
-                        <input requiered type="password" value="" name = "password"  class="form-control" id="password" placeholder="Password">
+                        <input requiered type="password" value="" name = "contraseña"  class="form-control" id="password" placeholder="Password">
                       </div>
                       <div class="form-group col-md-6">
                         <label for="password">Repetir contraseña</label>
-                        <input requiered name="repassword" type="password" value=""  class="form-control" id="repassword" placeholder="Repetir password">
+                        <input requiered type="password" name="contraseña2" value=""  class="form-control" id="repassword" placeholder="Repetir password">
                       </div>
                     </div>
 
@@ -128,7 +119,7 @@
                       
                     </div>   
                     <button type="submit" class="btn btn-primary">Registrarse</button>
-                    <a href="login.php" class="btn btn-link">Ya poseo una cuenta</a>
+                    <a href="inicioSesion.php" class="btn btn-link">Ya poseo una cuenta</a>
                   </form>
                   </div>                            
         </div>
