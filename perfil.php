@@ -1,5 +1,5 @@
 <?php
-
+require_once('encabezado.php');
 session_start();
 require_once('funciones.php');
 if (existeCookieInicio_DA() || validarSession_DA())
@@ -25,36 +25,15 @@ else
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Mi Perfil</title>
   </head>
   <body class="bg-info">
     <div class="container-fluid">
       <header class="navbar-nav">
         <div class="pos-f-t">
-          <div class=" dropdown collapse" id="navbarToggleExternalContent">
-                      <div class="bg-dark p-4">
-                        <a class="dropdown-item" href="#home_s">Home</a>
-                        <a class="dropdown-item" href="#productos_s">Productos</a>
-                        <a class="dropdown-item" href="#faq_s">F.A.Q</a>
-                        <a class="dropdown-item" href="../tpIntegrador/registro.php">Registrarse</a>
-                        <a class="dropdown-item" href="../tpIntegrador/inicioSesion.php">Ingresar</a>
-                        <a class="dropdown-item" href="../tpIntegrador/perfil.php">Tu Perfil</a>
-                        <a class="dropdown-item" href="#nosotros_s">Sobre Nosotros</a> 
-                      
-                      </div>
-          </div>
+
+        <?php cargarNavbarLogeado();?>
       
-        <nav class="navbar navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-              <h6>Categorias</h6>
-            </button>
-            <!--Boton Buscar -->
-            <form class="form-inline my-2 my-lg-0">
-                <input class="control form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" >
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Ir</button>
-              </form>
-        </nav>   
     </div>
     <section class="profile">
       <div class="row">
@@ -69,13 +48,13 @@ else
                         </div>
                         <section class="_dataUsuario mx-auto d-block col-4 col-lg-4 col-md-4">
                           <ul class="list-group text-center">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">Info del usuario
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Cantidad de ventas
                               <span class="badge badge-primary badge-pill">14</span>
                             </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">Info del usuario
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Cantidad de compras
                               <span class="badge badge-primary badge-pill">2</span>
                              </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-center">Info del usuario
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Por confirmar
                               <span class="badge badge-primary badge-pill">1</span>
                               </li>
                           </ul>
@@ -119,7 +98,7 @@ else
                     <section class="card-deck">  
                     <article class="card-body align-items-center">
                             <article class="_cajas col  card float-left" style="width: 17rem;">
-                                    <img src="img/celular.webp" class="card-img-top img-fluid m-right-1" alt="...">
+                                    <img src="img/client-1.png" class="card-img-top img-fluid m-right-1" alt="...">
                                     <article class="card-body">
                                       <h5 class="card-title">Nombre Producto</h5>
                                       <p class="card-text">Un breve desarrollo del producto.</p>
@@ -130,7 +109,7 @@ else
                                     </article>
                                 </article>
                             <article class="_cajas col  card float-left" style="width: 17rem;">
-                                    <img src="img/mesa.jpg" class="card-img-top img-fluid m-right-1" alt="...">
+                                    <img src="img/client-2.png"class="card-img-top img-fluid m-right-1" alt="...">
                                     <article class="card-body">
                                        <h5 class="card-title">Nombre Producto</h5>
                                        <p class="card-text">Un breve desarrollo del producto.</p>
@@ -141,7 +120,7 @@ else
                                     </article>
                                 </article>
                              <article class="_cajas col  card float-left" style="width: 17rem;">
-                                    <img src="img/ropa1.jpg" class="card-img-top img-fluid m-right-1" alt="...">
+                                    <img src="img/client-3.png" class="card-img-top img-fluid m-right-1" alt="...">
                                     <article class="card-body">
                                         <h5 class="card-title">Nombre Producto</h5>
                                         <p class="card-text">Un breve desarrollo del producto.</p>
@@ -152,7 +131,7 @@ else
                                     </article>
                                 </article>
                               <article class="_cajas col  card float-left" style="width: 17rem;">
-                                    <img src="img/ropa2.jpg" class="card-img-top img-fluid m-right-1" alt="...">
+                                    <img src="img/client-4.png" class="card-img-top img-fluid m-right-1" alt="...">
                                     <article class="card-body">
                                         <h5 class="card-title">Nombre Producto</h5>
                                         <p class="card-text">Un breve desarrollo del producto.</p>
